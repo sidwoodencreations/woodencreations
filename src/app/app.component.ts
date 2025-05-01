@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
     for(let i = 1; i <= 34; i++) {
       this.images.push(`img-${i}.jpg`);
     }
-    console.log(this.images);
   }
 
   openContactDialog(): void {

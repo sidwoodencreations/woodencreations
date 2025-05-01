@@ -4,6 +4,7 @@ import os
 import tornado.ioloop
 import tornado.web
 
+from service.http_handlers.ContactHttpHandler import ContactHttpHandler
 from service.http_handlers.HealthHttpHandler import HealthHttpHandler
 from service.http_handlers.StaticPageHttpHandler import AngularStaticFileHandler
 from service.common.logger import SingletonLogger
@@ -16,6 +17,7 @@ def make_app():
     default_path = os.path.join("dist", "wood", "browser")
     paths = [
         (r"/health", HealthHttpHandler),
+        (r"/contact", ContactHttpHandler),
         (r"/(.*)", AngularStaticFileHandler, {
             "path": default_path,
             "default_filename": "index.html",
