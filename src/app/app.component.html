@@ -1,0 +1,26 @@
+<div class="min-h-screen bg-gray-100">
+  <div class="container mx-auto px-4 py-8">
+    <div class="flex items-center justify-center mb-8">
+      <img src="logo.JPG" alt="Woodwork Logo" class="h-12 mr-4" />
+      <h1 class="text-3xl font-bold text-center">Sidney Wooden Creations</h1>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      @for (image of images; track image) {
+        <div class="relative overflow-hidden rounded-lg shadow-lg">
+          <img
+            class="w-full h-64 object-cover transform hover:scale-105 transition-transform duration-300"
+            alt="Woodwork Creation"
+            src="{{ image }}"
+          />
+        </div>
+      }
+    </div>
+  </div>
+
+  <button 
+    (click)="openContactDialog()" 
+    class="fixed bottom-6 right-6 bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors"
+  >
+    Contact Us
+  </button>
+</div>

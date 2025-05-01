@@ -1,0 +1,58 @@
+<div class="p-6">
+    <h2 mat-dialog-title class="text-2xl font-bold mb-4">Contact Us</h2>
+    <mat-dialog-content>
+      <form [formGroup]="queryForm" class="space-y-4">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input 
+            id="email" 
+            type="email" 
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            formControlName="email"
+          />
+        </div>
+        <div>
+            <label for="telno" class="block text-sm font-medium text-gray-700">Phone number</label>
+            <input 
+              id="telno" 
+              type="tel" 
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              formControlName="phoneNumber"
+            />
+        </div>
+        <div>
+            <label for="telno" class="block text-sm font-medium text-gray-700">Name</label>
+            <input 
+              id="name"  
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              formControlName="name"
+            />
+        </div>
+        <div>
+          <label for="query" class="block text-sm font-medium text-gray-700">Query</label>
+          <textarea 
+            id="query" 
+            rows="4" 
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            formControlName="query"
+          ></textarea>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions class="flex justify-end mt-4">
+      <button 
+        mat-button 
+        class="mr-2 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded" 
+        (click)="onCancel()"
+      >
+        Cancel
+      </button>
+      <button 
+        mat-button 
+        class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded"
+        (click)="onSubmit()"
+      >
+        Submit
+      </button>
+    </mat-dialog-actions>
+</div>
