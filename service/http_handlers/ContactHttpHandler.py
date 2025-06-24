@@ -10,8 +10,22 @@ class ContactHttpHandler(BaseHandler):
   def post(self):
     email = SMTPHelper()
     json_body = json.loads(self.request.body)
-    recipients = ["adrianhawkins03@gmail.com", json_body["email"]]
-    email.send_email(recipients, "Customer inquery", json_body["query"])
+    recipients = [
+      "sidwoodencreations@gmail.com",
+      "kimalexispeens@gmail.com"
+    ]
+    query = f"""
+    Query:
+      {json_body["query"]}
+    Phone Number:
+      {json_body["phoneNumber"]}
+    Email:
+      {json_body["email"]}
+    """
+    email.send_email(recipient_emails=recipients,
+                     subject=f"Customer inquery from {json_body['email']}",
+                     body=query
+                     )
     self.write({
       "Status": "Success",
     })

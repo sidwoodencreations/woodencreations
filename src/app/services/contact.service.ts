@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class ContactService {
 
-  private apiUrl = 'http://localhost:8888/contact';
+  private apiUrl = '/contact';
   private http:HttpClient = inject(HttpClient);
 
   sendContactRequest(data: any): Observable<any> {

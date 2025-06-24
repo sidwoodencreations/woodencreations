@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ContactService } from '../../services/contact.service';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, take } from 'rxjs';
 
 @Component({
   selector: 'app-contact-dialog',
@@ -29,13 +29,22 @@ export class ContactDialogComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
     query: new FormControl('', Validators.required),
+    website: new FormControl(''),
   });
 
   onCancel(): void {
     this.dialogRef.close();
   }
 
-  async onSubmit(): Promise<void> {
+  onSubmit(): void {
+    if (this.queryForm.get('website')?.value) {
+      this.snackBar.open('Submission failed. Please try again.', 'Close', {
+        duration: 3000,
+        panelClass: ['bg-red-600', 'text-white']
+      });
+      return;
+    }
+
     if (this.queryForm.valid) {
       const formData = this.queryForm.value;
       console.log('Form submitted:', formData);
@@ -44,7 +53,9 @@ export class ContactDialogComponent {
         panelClass: ['bg-green-600', 'text-white']
       });
       this.dialogRef.close();
-      await firstValueFrom(this.contactService.sendContactRequest(formData));
+      this.contactService.sendContactRequest(formData)
+      .pipe(take(1))
+      .subscribe();
     } else {
       this.snackBar.open('Please fill in all fields', 'Close', {
         duration: 3000,
